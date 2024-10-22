@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>JavaScript DOM Exercises</title> 
+    <link rel="stylesheet" href="style.css"> 
+</head> 
+<body> 
+    <h1>Интервью и Карьера</h1> 
+    <p id="text"> 
+        Does she need to be an empathetic leader? Ask about that. Does she need to take your company public? Ask about that. If you're the candidate, talk about why you took certain jobs. Explain why you left. Explain why you chose a certain school. Share why you decided to go to grad school. Discuss why you took a year off to backpack through Europe, and what you got out of the experience. What are your biggest weaknesses? Every candidate knows how to answer this question: Just pick a theoretical weakness and magically transform that flaw into a strength in disguise! For example: "My biggest weakness is getting so absorbed in my work that I lose all track of time. Every day I look up and realize everyone has gone home! I know I should be more aware of the clock, but when I love what I'm doing I just can't think of anything else." So your "biggest weakness" is that you'll put in more hours than everyone else? Great. What are your biggest strengths? I'm not sure why interviewers ask this question; your resume and experience should make your strengths readily apparent! Even so, if you're asked, provide a sharp, on-point answer. Be clear and precise! If you're a great problem solver, don't just say that: Provide a few examples, pertinent to the opening, that prove you're a great problem solver! If you're an emotionally intelligent leader, don't just say that! 
+    </p> 
+     
+    <div id="link-container"> 
+        <!-- Здесь будет добавлена ссылка на источник текста --> 
+    </div> 
+     
+    <script src="script.js"></script> 
+</body> 
+</html>
+document.addEventListener('DOMContentLoaded', () => { 
+    const paragraph = document.getElementById('text'); 
+    const text = paragraph.innerHTML; 
+ 
+    // 1. Выделить слова длиннее 8 символов 
+    const highlightedText = text.replace(/\b(\w{8,})\b/g, '<span style="background-color: yellow;">$1</span>'); 
+    paragraph.innerHTML = highlightedText; 
+ 
+    // 2. Добавить ссылку на источник текста 
+    const link = document.createElement('a'); 
+    link.href = 'https://www.inc.com/jeff-haden/this-new-linkedin-study-reveals-top-8-jobinterview-questions-and-how-great-job-candidates-answer-them.html'; 
+    link.textContent = 'Источник текста'; 
+    document.getElementById('link-container').appendChild(link); 
+ 
+    // 3. Разделить предложения на отдельные строки 
+    const sentences = paragraph.innerHTML.split('. ').join('.<br>'); 
+    paragraph.innerHTML = sentences; 
+ 
+    // 4. Посчитать количество слов в параграфе 
+    const wordCount = text.split(/\s+/).length; 
+    const wordCountElement = document.createElement('p'); 
+    wordCountElement.textContent = Количество слов: ${wordCount}; 
+    document.body.insertBefore(wordCountElement, paragraph); 
+ 
+    // 5. Заменить знаки вопроса и восклицания 
+    const finalText = paragraph.innerHTML 
+        .replace(/\?/g, '🤔') 
+        .replace(/!/g, '😲'); 
+    paragraph.innerHTML = finalText; 
+});
